@@ -1,5 +1,20 @@
-//: Playground - noun: a place where people can play
+//: ## Caluclate Grades and manage time more efficient
+import Foundation
 
-import UIKit
+struct Grade {
+    let value: Double
+    let importance: Int
+}
 
-var str = "Hello, playground"
+func calculateResult(grades grades: [Grade]) -> Double {
+    
+    let valueTotal = grades.reduce(0.0) { $0 + $1.value * Double($1.importance)}
+    let importanceTotal = grades.reduce(0) { $0 + $1.importance }
+    
+    return valueTotal / Double(importanceTotal)
+}
+
+calculateResult(grades: [
+    Grade(value: 6.0, importance: 1),
+    Grade(value: 8, importance: 2)
+    ])
