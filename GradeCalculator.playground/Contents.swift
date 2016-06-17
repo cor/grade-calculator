@@ -2,19 +2,30 @@
 import Foundation
 
 struct Grade {
-    let value: Double
+    let score: Double
     let importance: Int
 }
 
-func calculateResult(grades grades: [Grade]) -> Double {
-    
-    let valueTotal = grades.reduce(0.0) { $0 + $1.value * Double($1.importance)}
-    let importanceTotal = grades.reduce(0) { $0 + $1.importance }
-    
-    return valueTotal / Double(importanceTotal)
+extension SequenceType where Generator.Element == Grade {
+    func calculateResult() -> Double {
+        
+        let scoreTotal = self.reduce(0.0) { $0 + $1.score * Double($1.importance)}
+        let importanceTotal = self.reduce(0) { $0 + $1.importance }
+        
+        return scoreTotal / Double(importanceTotal)
+    }
 }
 
-calculateResult(grades: [
-    Grade(value: 6.0, importance: 1),
-    Grade(value: 8, importance: 2)
-    ])
+
+let scheikunde = [
+    Grade(score: 4.2, importance: 2),
+    Grade(score: 4.8, importance: 1),
+    Grade(score: 2.1, importance: 2),
+    Grade(score: 5.6, importance: 2)
+]
+
+
+
+scheikunde.calculateResult()
+
+
